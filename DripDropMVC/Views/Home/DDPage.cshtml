@@ -1,0 +1,55 @@
+﻿@model DripDropMVC.Models.DripDrop
+
+<div class="container col-xxl-8 px-4 py-5 mt-5">
+    <div class="row gy-2 h-100 row-cols-md-2 row-cols-1">
+        <div class="col border-2 border-end">
+            <h1 class="font-weight-bold 1h-1 mb-3">DripDrop</h1>
+            <h4 class="lead">
+                This application will consider the two numbers and for each number between 1 and 100.
+                It will print <strong>DRIP</strong> for the numbers that are divisible by the first number. <strong>DROP</strong> will be printed
+                for the numbers divisible by the second number. <strong>DRIPDROP</strong> for the numbers divisible by both and
+                simply print the number if it is not divisible by either.
+            </h4>
+
+            <h2 class="mt-5 border-bottom border-2">Instructions</h2>
+            <p>
+                Enter 2 numbers. The first number will be used to evaluate Drip.
+                the second number will be used to evaluate Drop and DripDrop will be determined based on
+                the combination the two numbers.
+            </p>
+        </div>
+        <div class="col">
+            <div>
+                <h5>Enter numbers</h5>
+                @* Form goes here *@
+                <form asp-controller="Home" asp-action="DDPage" method="post">
+                    <div class="form-group">
+                        <label asp-for="DripValue">Drip Value</label>
+                        <input type="number" asp-for="DripValue" class="form-control" placeholder="Enter Drip" value="@Model.DripValue" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DropValue">Drop Value</label>
+                        <input type="number" asp-for="DropValue" class="form-control" placeholder="Enter Drop" value="@Model.DropValue" />
+                    </div>
+                    <button type="submit" class="btn btn-dark mt-2">Submit</button>
+                </form>
+                <h2 class="mt-5 border-bottom border-2">Results</h2>
+                <div class="table-responsive">
+                    @* Table goes here *@
+                    @if (Model.Result.Count > 0)
+                    {
+                        <table class="table-striped table-hover table table-dark">
+                            <thead>
+                                <tr><th colspan="5">Drip Drop results</th></tr>
+                            </thead>
+                            @for (int i = 0; i < Model.Result.Count(); i += 5)
+                            {
+                                <tr><td>@Model.Result[i]</td><td>@Model.Result[i + 1]</td><td>@Model.Result[i + 2]</td><td>@Model.Result[i + 3]</td><td>@Model.Result[i + 4]</td></tr>
+                            }
+                        </table>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
